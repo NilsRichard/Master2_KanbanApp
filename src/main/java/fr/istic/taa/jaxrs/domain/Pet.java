@@ -33,8 +33,8 @@ public class Pet {
     this.name = name;
   }
 
-  @XmlElementWrapper(name = "tags")
-  @XmlElement(name = "tag")
+//  @XmlElementWrapper(name = "tags")
+//  @XmlElement(name = "tag")
   public List<Tag> getTags() {
     return tags;
   }

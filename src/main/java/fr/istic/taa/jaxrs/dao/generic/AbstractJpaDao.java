@@ -12,8 +12,9 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 
 	protected EntityManager entityManager;
 
-	public AbstractJpaDao() {
+	public AbstractJpaDao(Class<T> clazz) {
 		this.entityManager = EntityManagerHelper.getEntityManager();
+		this.clazz = clazz;
 	}
 
 	public void setClazz(Class<T> clazzToSet) {
@@ -25,7 +26,7 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 	}
 
 	public List<T> findAll() {
-		return entityManager.createQuery("select e from " + clazz.getName() + " as e",clazz).getResultList();
+		return entityManager.createQuery("select e from " + clazz.getName() + " as e", clazz).getResultList();
 	}
 
 	public void save(T entity) {
@@ -33,7 +34,6 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 		t.begin();
 		entityManager.persist(entity);
 		t.commit();
-
 	}
 
 	public T update(final T entity) {
@@ -42,7 +42,6 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 		T res = entityManager.merge(entity);
 		t.commit();
 		return res;
-
 	}
 
 	public void delete(T entity) {
@@ -50,7 +49,6 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 		t.begin();
 		entityManager.remove(entity);
 		t.commit();
-
 	}
 
 	public void deleteById(K entityId) {
