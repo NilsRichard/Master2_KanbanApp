@@ -47,8 +47,6 @@ public class BoardKB implements Serializable {
 	}
 
 	@XmlElementWrapper(name = "columns")
-	@XmlElement(name = "column")
-	@JsonIgnoreProperties(ignoreUnknown = true)
 	@OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST)
 	public List<ColumnKB> getColumns() {
 		return columns;

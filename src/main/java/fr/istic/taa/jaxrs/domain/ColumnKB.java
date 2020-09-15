@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class ColumnKB implements Serializable  {
 
@@ -37,6 +39,7 @@ public class ColumnKB implements Serializable  {
 	}
 
 	@ManyToOne
+	@JsonIgnoreProperties
 	public BoardKB getBoard() {
 		return board;
 	}

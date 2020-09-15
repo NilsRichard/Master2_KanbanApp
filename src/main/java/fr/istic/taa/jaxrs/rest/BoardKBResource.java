@@ -10,6 +10,8 @@ import javax.ws.rs.core.Response;
 
 import fr.istic.taa.jaxrs.dao.BoardKBDao;
 import fr.istic.taa.jaxrs.domain.BoardKB;
+import fr.istic.taa.jaxrs.domain.CardKB;
+import fr.istic.taa.jaxrs.domain.ColumnKB;
 import io.swagger.v3.oas.annotations.Parameter;
 
 @Path("/boardkb")
@@ -33,7 +35,16 @@ public class BoardKBResource {
 	@Consumes("application/json")
 	public Response addBoardKB(
 			@Parameter(description = "BoardKB object that needs to be added to the store", required = true) BoardKB board) {
+		
+		for (ColumnKB column : board.getColumns()) {
+			column.setBoard(board);
+			for (CardKB card : column.getCards()) {
+				card.setColumn(column);
+			}
+		}
+		
 		boardKBDao.save(board);
-		return Response.ok().entity("SUCCESS").build();
+		
+		return Response.ok().entity(board.getId()).build();
 	}
 }

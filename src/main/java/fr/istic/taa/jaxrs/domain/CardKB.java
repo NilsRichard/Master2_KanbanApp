@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class CardKB implements Serializable  {
@@ -65,6 +68,7 @@ public class CardKB implements Serializable  {
 	}
 
 	@ManyToOne
+	@JsonIgnoreProperties
 	public ColumnKB getColumn() {
 		return column;
 	}
