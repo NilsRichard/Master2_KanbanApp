@@ -1,6 +1,7 @@
 package fr.istic.taa.jaxrs.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,21 +11,26 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class TagKB implements Serializable  {
+
+	private static final long serialVersionUID = -5312824533997938950L;
 
 	private Long id;
 
 	private String label;
 
-	private List<CardKB> cards;
+	private List<CardKB> cards = new ArrayList<CardKB>();
 	
 	public void addCards(CardKB card) {
 		this.cards.add(card);
 	}
 
 	@ManyToMany
+	@JsonIgnoreProperties
 	public List<CardKB> getCards() {
 		return cards;
 	}

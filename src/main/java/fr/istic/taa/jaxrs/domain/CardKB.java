@@ -5,18 +5,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class CardKB implements Serializable  {
+
+	private static final long serialVersionUID = -7963053538051720399L;
 
 	private Long id;
 
@@ -99,7 +102,8 @@ public class CardKB implements Serializable  {
 		return location;
 	}
 
-	@ManyToMany(mappedBy="cards")
+	@XmlElementWrapper(name = "tags")
+	@ManyToMany(mappedBy="cards", cascade = CascadeType.PERSIST)
 	public List<TagKB> getTags() {
 		return tags;
 	}

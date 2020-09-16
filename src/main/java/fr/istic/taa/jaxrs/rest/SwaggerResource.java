@@ -3,6 +3,7 @@ package fr.istic.taa.jaxrs.rest;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ws.rs.GET;
@@ -17,6 +18,7 @@ public class SwaggerResource {
     @GET
     public byte[] Get1() {
         try {
+        	logger.log(Level.INFO, "Charging swagger");
             return Files.readAllBytes(FileSystems.getDefault().getPath("src/main/webapp/swagger/index.html"));
         } catch (IOException e) {
             return null;

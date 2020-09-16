@@ -7,8 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class UserKB implements Serializable  {
+
+	private static final long serialVersionUID = -3865139814508230644L;
 
 	private Long id;
 
@@ -30,6 +34,7 @@ public class UserKB implements Serializable  {
 	}
 
 	@OneToOne(mappedBy = "assignedUser")
+	@JsonIgnoreProperties
 	public CardKB getCard() {
 		return card;
 	}

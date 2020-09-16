@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +15,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.io.Serializable;
-
 @Entity
 @NamedQueries({ @NamedQuery(name = "BoardKB.findAll", query = "SELECT b FROM BoardKB b"),
 		@NamedQuery(name = "BoardKB.findByName", query = "SELECT b FROM BoardKB b WHERE b.name = :name"), })
 @XmlRootElement(name = "BoardKB")
 public class BoardKB implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1517205058451738936L;
 
 	private Long id;
