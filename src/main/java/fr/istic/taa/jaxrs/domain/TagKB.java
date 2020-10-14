@@ -13,48 +13,52 @@ import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * @author Nils Richard
+ * @author Dorian Bouillet
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class TagKB implements Serializable  {
+public class TagKB implements Serializable {
 
-	private static final long serialVersionUID = -5312824533997938950L;
+    private static final long serialVersionUID = -5312824533997938950L;
 
-	private Long id;
+    private Long id;
 
-	private String label;
+    private String label;
 
-	private List<CardKB> cards = new ArrayList<CardKB>();
-	
-	public void addCards(CardKB card) {
-		this.cards.add(card);
-	}
+    private List<CardKB> cards = new ArrayList<CardKB>();
 
-	@ManyToMany
-	@JsonIgnoreProperties
-	public List<CardKB> getCards() {
-		return cards;
-	}
+    public void addCards(CardKB card) {
+        this.cards.add(card);
+    }
 
-	@Id
-	@GeneratedValue
-	public Long getId() {
-		return id;
-	}
+    @ManyToMany
+    @JsonIgnoreProperties
+    public List<CardKB> getCards() {
+        return cards;
+    }
 
-	public String getLabel() {
-		return label;
-	}
+    @Id
+    @GeneratedValue
+    public Long getId() {
+        return id;
+    }
 
-	public void setCards(List<CardKB> cards) {
-		this.cards = cards;
-	}
+    public String getLabel() {
+        return label;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setCards(List<CardKB> cards) {
+        this.cards = cards;
+    }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
 }

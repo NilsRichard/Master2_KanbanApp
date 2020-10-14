@@ -14,33 +14,37 @@ import fr.istic.taa.jaxrs.domain.CardKB;
 import fr.istic.taa.jaxrs.domain.ColumnKB;
 import io.swagger.v3.oas.annotations.Parameter;
 
+/**
+ * @author Nils Richard
+ * @author Dorian Bouillet
+ */
 @Path("/Tagkb")
-@Produces({ "application/json", "application/xml" })
+@Produces({"application/json", "application/xml"})
 public class TagKBResource {
 
-	private TagKBDao tagKBDao;
+    private TagKBDao tagKBDao;
 
-	public TagKBResource() {
-		tagKBDao = new TagKBDao();
-	}
+    public TagKBResource() {
+        tagKBDao = new TagKBDao();
+    }
 
-	@GET
-	@Path("/{label}")
-	public TagKB getTagKBByLabel(@PathParam("label") String label) {
-		return tagKBDao.findByLabel(label);
-	}
+    @GET
+    @Path("/{label}")
+    public TagKB getTagKBByLabel(@PathParam("label") String label) {
+        return tagKBDao.findByLabel(label);
+    }
 
-	@POST
-	@Consumes("application/json")
-	public Response addTagKB(
-			@Parameter(description = "TagKB object that needs to be added to the app", required = true) TagKB tag) {
+    @POST
+    @Consumes("application/json")
+    public Response addTagKB(
+            @Parameter(description = "TagKB object that needs to be added to the app", required = true) TagKB tag) {
 
-		for (CardKB card : tag.getCards()) {
-			card.addTag(tag);
-		}
+        for (CardKB card : tag.getCards()) {
+            card.addTag(tag);
+        }
 
-		tagKBDao.save(tag);
+        tagKBDao.save(tag);
 
-		return Response.ok().entity(tag.getId()).build();
-	}
+        return Response.ok().entity(tag.getId()).build();
+    }
 }

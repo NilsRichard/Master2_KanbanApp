@@ -15,34 +15,38 @@ import fr.istic.taa.jaxrs.domain.CardKB;
 import fr.istic.taa.jaxrs.domain.TagKB;
 import io.swagger.v3.oas.annotations.Parameter;
 
+/**
+ * @author Nils Richard
+ * @author Dorian Bouillet
+ */
 @Path("/cardkb")
-@Produces({ "application/json", "application/xml" })
+@Produces({"application/json", "application/xml"})
 public class CardKBResource {
 
-	private CardKBDao cardKBDao;
+    private CardKBDao cardKBDao;
 
-	public CardKBResource() {
-		cardKBDao = new CardKBDao();
-		cardKBDao.populate();
-	}
+    public CardKBResource() {
+        cardKBDao = new CardKBDao();
+        cardKBDao.populate();
+    }
 
-	@GET
-	@Path("/{label}")
-	public List<CardKB> getCardKBLabelLike(@PathParam("label") String label) {
-		return cardKBDao.findLabelLike(label);
-	}
+    @GET
+    @Path("/{label}")
+    public List<CardKB> getCardKBLabelLike(@PathParam("label") String label) {
+        return cardKBDao.findLabelLike(label);
+    }
 
-	@POST
-	@Consumes("application/json")
-	public Response addCardKB(
-			@Parameter(description = "CardKB object that needs to be added to the app", required = true) CardKB card) {
-		
-		for (TagKB tag : card.getTags()) {
-			tag.addCards(card);
-		}
-		
-		cardKBDao.save(card);
-		
-		return Response.ok().entity(card.getId()).build();
-	}
+    @POST
+    @Consumes("application/json")
+    public Response addCardKB(
+            @Parameter(description = "CardKB object that needs to be added to the app", required = true) CardKB card) {
+
+        for (TagKB tag : card.getTags()) {
+            tag.addCards(card);
+        }
+
+        cardKBDao.save(card);
+
+        return Response.ok().entity(card.getId()).build();
+    }
 }
