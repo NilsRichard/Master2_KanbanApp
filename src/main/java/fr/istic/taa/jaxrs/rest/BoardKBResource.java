@@ -14,6 +14,8 @@ import fr.istic.taa.jaxrs.domain.CardKB;
 import fr.istic.taa.jaxrs.domain.ColumnKB;
 import io.swagger.v3.oas.annotations.Parameter;
 
+import java.util.List;
+
 /**
  * @author Nils Richard
  * @author Dorian Bouillet
@@ -33,6 +35,12 @@ public class BoardKBResource {
     @Path("/{name}")
     public BoardKB getBoardKBByName(@PathParam("name") String name) {
         return boardKBDao.findByName(name);
+    }
+
+
+    @GET
+    public List<BoardKB> getBoards() {
+        return boardKBDao.findAll();
     }
 
     @POST
